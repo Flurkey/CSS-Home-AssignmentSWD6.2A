@@ -5,7 +5,7 @@ import { Owner } from "../dto/registration.dto";
 
 @Injectable()
 export class RegistrationService {
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = 'https://css.teknologija.com/api';
 
   constructor(private httpClient: HttpClient) {}
 
