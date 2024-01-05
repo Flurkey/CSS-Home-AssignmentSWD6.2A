@@ -1,0 +1,43 @@
+<style>
+    #container {
+        margin: 0;
+    }
+</style>
+
+<app-navbar></app-navbar>
+
+<div *ngIf="ownersLoaded;" class="table-container">
+  <table class="table" id="drone-table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Owner’s ID card number</th>
+        <th scope="col">Owner’s last name</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Model</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let owner of owners">
+        <td>{{owner.id}}</td>
+        <td>{{owner.ownerIdCardNumber}}</td>
+        <td>{{owner.ownerLastName}}</td>
+        <td>{{owner.brandName}}</td>
+        <td>{{owner.model}}</td>
+        <td><button (click)="view(owner.id)" type="button" class="btn btn-primary">View</button></td>
+        <td><button (click)="update(owner.id)" type="button" class="btn btn-primary" [disabled]="manager">Update</button></td>
+        <td><button (click)="delete(owner.id)" type="button" class="btn btn-danger" [disabled]="admin">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="export-buttons">
+    <button (click)="exportToExcel()" type="button" class="btn btn-primary">Export to Excel</button>
+    <div class="separator"></div>
+    <button (click)="exportToPDF()" type="button" class="btn btn-primary">Export to PDF</button>
+  </div>
+</div>
+

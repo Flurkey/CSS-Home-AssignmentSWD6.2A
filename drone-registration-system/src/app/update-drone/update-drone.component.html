@@ -1,0 +1,134 @@
+<app-navbar></app-navbar>
+<style>
+    .card {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 20%);
+        height: 770px;
+        border-radius: 10px;
+        margin-top: 10px;
+        margin-bottom: auto;
+    }
+
+    .forms-inputs {
+        position: relative
+    }
+
+    .forms-inputs span {
+        position: absolute;
+        top: -18px;
+        left: 10px;
+        background-color: #fff;
+        padding: 5px 10px;
+        font-size: 15px
+    }
+
+    .forms-inputs input {
+        height: 50px;
+        border: 2px solid #eee;
+        width: 100%;
+    }
+
+    .forms-inputs input:focus {
+        box-shadow: none;
+        outline: none;
+        border: 1px solid #2c2c2c
+    }
+
+    .btn {
+        margin-top: 20px;
+        height: 50px;
+        margin-bottom: 20px;
+    }
+    
+    .error-message {
+        color: red;
+    }
+</style>
+<div class="container mt-5">
+    <i class="bi bi-person-circle"></i>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="card px-5 py-5" id="form1">
+                <div class="form-data">
+                    <div class="forms-inputs mb-4">
+                        <span style="font-weight: bold;">Serial Number</span>
+                        <input autocomplete="off" type="text" [(ngModel)]="serialNumber" class="form-control" required>
+                    </div>
+
+                    <div class="forms-inputs mb-4">
+                        <span style="font-weight: bold;">Model ID</span>
+                        <input autocomplete="off" type="text" [(ngModel)]="modelId" class="form-control" required>
+                    </div>
+
+                    <div class="forms-inputs mb-4">
+                        <span style="font-weight: bold;">Owner's ID Card</span>
+                        <input
+                        type="text"
+                        id="IdCardNumber"
+                        name="IdCardNumber"
+                        class="form-control"
+                        [(ngModel)]="ownerIdCardNumber"
+                        #IdCardNumber="ngModel"
+                        required
+                        pattern="[0-9]+[a-zA-Z]"
+                      />
+                      
+                      <div *ngIf="IdCardNumber.errors?.['pattern']" class="error-message">
+                        Please enter a valid ID card number.
+                      </div>
+                    </div>
+                    <div class="forms-inputs mb-4">
+                        <span style="font-weight: bold;">Owner's First Name</span>
+                        <input autocomplete="off" type="text" [(ngModel)]="ownerFirstName" class="form-control" required>
+                    </div>
+                    <div class="forms-inputs mb-4">
+                        <span style="font-weight: bold;">Owner's Last Name</span>
+                        <input autocomplete="off" type="text" [(ngModel)]="ownerLastName" class="form-control" required>
+                    </div>
+                    <div class="forms-inputs mb-4">
+                        <span style="font-weight: bold;">Owner's Contact Number</span>
+                        <input
+                            type="text"
+                            id="ContactNumber"
+                            name="ContactNumber"
+                            class="form-control"
+                            minlength="8"
+                            [(ngModel)]="ownerContactNumber"
+                            #ContactNumber="ngModel"
+                            required
+                            pattern="[0-9]+"
+                        />
+
+                        <div *ngIf="ContactNumber.errors?.['pattern']" class="error-message">
+                          Contact number must be numeric.
+                        </div>
+
+                        <div *ngIf="ContactNumber.errors?.['minlength']" class="error-message">
+                          Contact number must be at least 8 characters long.
+                        </div>
+                    </div>
+                    <div class="forms-inputs mb-4">
+                        <span style="font-weight: bold;">Owner's Email Address</span>
+                        <input
+                            type="text"
+                            id="EmailAddress"
+                            name="EmailAddress"
+                            class="form-control"
+                            [(ngModel)]="ownerEmailAddress"
+                            #EmailAddress="ngModel"
+                            required
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        />
+
+                        <div *ngIf="EmailAddress.errors?.['pattern']" class="error-message">
+                        Please enter a valid email address.
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <button (click)="updateDrone()" class="btn btn-dark w-100">Update Drone</button>
+                        <div *ngIf="errorMessage" class="text-center text-danger mb-4">{{ errorMessage }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
